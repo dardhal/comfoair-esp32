@@ -181,10 +181,10 @@ namespace comfoair {
       LAZYSWITCH(227, "bypass_state", "%d", vals[0])  // %
 
       // temps
-      LAZYSWITCH(209, "rmot", "%.1f", uint16/ 10.0)  // C°
+      LAZYSWITCH(209, "rmot", "%.1f", int16/ 10.0)  // C°
       LAZYSWITCH(212, "target_temp", "%.1f", uint16/ 10.0)  // C°
-      LAZYSWITCH(220, "pre_heater_temp_before", "%.1f", uint16/10.0) // C°
-      LAZYSWITCH(221, "post_heater_temp_after", "%.1f", uint16/10.0)  // C°
+      LAZYSWITCH(220, "pre_heater_temp_before", "%.1f", int16/10.0) // C°
+      LAZYSWITCH(221, "post_heater_temp_after", "%.1f", int16/10.0)  // C°
       LAZYSWITCH(274, "extract_air_temp", "%.1f", int16 /10.0)  // C°   
       LAZYSWITCH(275, "exhaust_air_temp", "%.1f", int16 /10.0)  // C°   
       LAZYSWITCH(276, "outdoor_air_temp", "%.1f", int16 /10.0)  // C°   
