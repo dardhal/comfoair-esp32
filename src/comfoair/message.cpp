@@ -166,13 +166,13 @@ namespace comfoair {
       LAZYSWITCH(129, "power_consumption_ytd", "%d", uint16)  // kWh
       LAZYSWITCH(130, "power_consumption_since_start", "%d", uint16)  // kWh
 
-      LAZYSWITCH(192, "remaining_days_filter_replacement", "%d", uint16)  // kWh
+      LAZYSWITCH(192, "remaining_days_filter_replacement", "%d", uint16)
       
       
       // Avoided heating section
       LAZYSWITCH(213, "ah_actual", "%.2f", uint16/ 100.0)  // watts
-      LAZYSWITCH(214, "ah_ytd", "%d", uint16)  // wh
-      LAZYSWITCH(215, "ah_total", "%d", uint16)  // wh
+      LAZYSWITCH(214, "ah_ytd", "%d", uint16)  // kWh
+      LAZYSWITCH(215, "ah_total", "%d", uint16)  // kWh
       // AVoided cooling section
       LAZYSWITCH(216, "ac_actual", "%.2f", uint16/ 100.0)  // watts
       LAZYSWITCH(217, "ac_ytd", "%d", uint16)  // wh
