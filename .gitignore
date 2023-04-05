@@ -5,4 +5,3 @@ secrets.h
 .vscode/launch.json
 .vscode/ipch
 .vscode/
-src/secrets.h
