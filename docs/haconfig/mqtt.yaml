@@ -157,7 +157,7 @@ sensor:
 
 -   name: "MVHR Running Mean Outdoor Temp (RMOT)"
     state_topic: "comfoair/rmot"
-    unit_of_measurement: "ºC"
+    unit_of_measurement: "°C"
     icon: mdi:thermometer
 
 -   name: "MVHR Remaining Days Filter Replacement"
