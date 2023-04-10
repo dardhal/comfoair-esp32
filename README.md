@@ -177,7 +177,9 @@ File "templates.yaml" is also provided with this project with a few of the senso
 mqtt: !include templates.yaml
 ```
 
-## Home Assistant advanced configuration (setting ventilation speed from HA GUI)
+## Home Assistant advanced configuration
+
+### Setting ventilation speed from Home Assistant GUI
 Doing this requires some more configuration changes to HA, and creating a "Helper" (Settings -> Devices & Services -> Helpers) from the Home Assistant GUI to trigger MQTT commands to the broker to run the required action, namely, chosse a helperof type "Dropdown", and give it a name (ie "MVHR Ventilation Speed"), and add the four ventilation (textual) speeds as "Options" (they need to be written exactly as in "templates.yaml", if not using the template, use just the numbers 0 through 3). This will create a new entity called "input_select.mvhr_ventilation_speed"
 
 Now add the following to the "sensor" configuration section in your HA "configuration.yaml" file, to create the associated sensors :
@@ -200,7 +202,27 @@ The second automation is to keep the selected ventilation speed in the drop down
 When all these bits are added in the config, YAML files reloaded, all that remains to be done is adding the "input_select.mvhr_ventilation_speed" as any other entity to a Lovelace card in the GUI.
 
 
+### Setting ventilation speed from Home Assistant GUI
+As in the previous case we need a "Helper" to (well, help) us both set the bypass state (activated or deactivated) and to show it in a switch-like entity in Home Assistant GUI. As we can only set the bypass to 100% for 1 hour or force disable the bypass (set it to 0%) for one hour, the right option is for an "input_boolean" (Helper of type "Toggle") to be created (gave it a name "MVHR Force Bypass" and an entity_id of "input_boolean.mvhr_bypass_on_off").
+
+Once done create a template sensor off the helper, as per the code below to be added to "configuration.yaml" :
+```yaml
+  - platform: template
+    sensors:
+      mvhr_bypass_select_state:
+        value_template: "{{ states('input_boolean.mvhr_bypass_on_off') }}"
+```
+
+So we can finally create an automation, "automations.yaml" file in this repository has been updated with both the automation so that the switch in the UI can be used to set the bypass on or off, as well as the automation so that when the bypass state is changed (forced) from the MVHR unit, the switch also changes in the UI.
+
+Note I made the decision to consider the bypass on when open factor to be 85 % or higher, and deem the bypass closed for open factors below 85 %. Had it been possible to set the bypass open factor programmaticallly I would have chosen a different entity to show (ie a dial), but we can just set the bypass 100% open for one hour, or 0% open for one hour, besides setting it for auto, and hence some arbitrary cut-off point had to be chosen.
+
+
+Note, as it is also the case for the fan speed set through MQTT, after the two hours have passed since setting the fan speed manually (or one hour for the bypass state), the MVHR unit should automatically fall back to auto mode for the given function (fan or bypass) with no need for human intervention.
+
+
 ## TODO
 
-1. Create entity in the GUI for setting the bypass manually. This comes with a trick : only commands available are for forcing the bypass on or off for 1 hour. Although this is not much different to setting the ventilation speed, as the speed goes back to default after 2 hours.
+Nothing I can think so far.
+
 
